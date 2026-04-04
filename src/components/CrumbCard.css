@@ -1,0 +1,120 @@
+.crumb-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s, border-color 0.2s;
+  animation: scaleIn 0.3s ease-out;
+}
+
+.crumb-card:active {
+  transform: scale(0.98);
+}
+
+.crumb-card.collected {
+  border-color: var(--accent-glow);
+}
+
+.crumb-card.compact {
+  padding: 10px;
+  gap: 6px;
+}
+
+.crumb-card-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.crumb-card-meta {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.crumb-card-name {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.crumb-card-time {
+  font-size: 11px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.crumb-type-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crumb-card-image {
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16/10;
+  background: var(--bg-tertiary);
+}
+
+.crumb-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.crumb-card-text {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+
+.compact .crumb-card-text {
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.crumb-card-footer {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 4px;
+}
+
+.crumb-stat {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--text-muted);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 0;
+  transition: color 0.2s;
+}
+
+.crumb-stat:active {
+  color: var(--accent-light);
+}
+
+.crumb-collected-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--success);
+  background: rgba(0, 184, 148, 0.12);
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
+}

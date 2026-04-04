@@ -1,0 +1,191 @@
+.map-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.map-loading {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--text-secondary);
+}
+
+.map-loading-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.map-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  pointer-events: none;
+}
+
+.map-logo {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(135deg, var(--accent-light), var(--accent));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  pointer-events: auto;
+}
+
+.map-count {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border);
+  pointer-events: auto;
+}
+
+.map-container {
+  flex: 1;
+  width: 100%;
+  z-index: 1;
+}
+
+.map-btn {
+  position: absolute;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  z-index: 500;
+  transition: background 0.2s;
+}
+
+.map-btn:active {
+  background: var(--bg-tertiary);
+}
+
+.recenter-btn {
+  bottom: 200px;
+}
+
+/* User marker */
+.user-marker {
+  background: none !important;
+  border: none !important;
+}
+
+.user-marker-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 3px solid white;
+  box-shadow: 0 0 12px var(--accent-glow);
+  position: relative;
+}
+
+.user-marker-pulse {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  background: var(--accent);
+  opacity: 0.3;
+  animation: ripple 2s ease-out infinite;
+}
+
+/* Crumb markers */
+.crumb-map-marker {
+  background: none !important;
+  border: none !important;
+}
+
+/* Bottom Sheet */
+.map-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 600;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  border-top: 1px solid var(--border-light);
+  max-height: 55%;
+  transform: translateY(calc(100% - 52px));
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-sheet.open {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 14px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.sheet-grip {
+  position: absolute;
+  top: 8px;
+  width: 36px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--border-light);
+}
+
+.sheet-handle svg {
+  transition: transform 0.3s;
+}
+
+.sheet-handle svg.flipped {
+  transform: rotate(180deg);
+}
+
+.sheet-content {
+  padding: 0 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  overflow-y: auto;
+  max-height: calc(55vh - 52px);
+}
+
+.sheet-back {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-light);
+  padding: 10px;
+  text-align: center;
+}

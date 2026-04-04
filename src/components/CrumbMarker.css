@@ -1,0 +1,52 @@
+.crumb-marker {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.crumb-marker:hover {
+  transform: scale(1.15);
+}
+
+.crumb-marker.collected {
+  opacity: 0.5;
+}
+
+.crumb-marker-ring {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-secondary);
+  position: relative;
+  z-index: 2;
+}
+
+.crumb-marker-inner {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.crumb-marker-pulse {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: ripple 2s ease-out infinite;
+  z-index: 1;
+}
+
+.crumb-marker.collected .crumb-marker-pulse {
+  display: none;
+}
