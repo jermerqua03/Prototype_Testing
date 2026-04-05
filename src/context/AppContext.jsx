@@ -11,6 +11,15 @@ export function AppProvider({ children }) {
   const [friends] = useState(MOCK_FRIENDS);
   const [notifications, setNotifications] = useState([]);
   const [collected, setCollected] = useState([]);
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = useCallback(() => {
+    setTheme((prev) => {
+      const next = prev === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      return next;
+    });
+  }, []);
 
   useEffect(() => {
     if (position) {
@@ -72,6 +81,8 @@ export function AppProvider({ children }) {
         collected,
         dropCrumb,
         collectCrumb,
+        theme,
+        toggleTheme,
       }}
     >
       {children}

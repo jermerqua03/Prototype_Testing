@@ -1,10 +1,10 @@
-import { Settings, MapPin, Package, Users, ChevronRight, LogOut } from 'lucide-react';
+import { Settings, MapPin, Package, Users, ChevronRight, LogOut, Sun, Moon } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import Avatar from '../components/Avatar';
 import './ProfileScreen.css';
 
 export default function ProfileScreen() {
-  const { user, friends, collected, crumbs } = useApp();
+  const { user, friends, collected, crumbs, theme, toggleTheme } = useApp();
   const droppedCount = crumbs.filter((c) => c.user.id === user.id).length;
 
   return (
@@ -77,6 +77,12 @@ export default function ProfileScreen() {
             <ChevronRight size={16} className="menu-arrow" />
           </button>
         ))}
+        <button className="menu-item" onClick={toggleTheme}>
+          {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          <span className="menu-label">Appearance</span>
+          <span className="menu-detail">{theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</span>
+          <ChevronRight size={16} className="menu-arrow" />
+        </button>
       </div>
 
       <button className="logout-btn">
