@@ -105,7 +105,10 @@ export default function MapScreen() {
   return (
     <div className="map-screen">
       <div className="map-header">
-        <h1 className="map-logo">crmbz</h1>
+        <div className="map-brand">
+          <h1 className="map-logo">crmbz</h1>
+          <p className="map-subtitle">Digital meets physical</p>
+        </div>
         <span className="map-count">{nearbyCrumbs.filter((c) => !c.collected).length} nearby</span>
       </div>
 

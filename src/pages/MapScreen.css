@@ -41,6 +41,13 @@
   pointer-events: none;
 }
 
+.map-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  pointer-events: auto;
+}
+
 .map-logo {
   font-size: 22px;
   font-weight: 800;
@@ -48,6 +55,15 @@
   background: linear-gradient(135deg, var(--accent-light), var(--accent));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  pointer-events: auto;
+  line-height: 1.1;
+}
+
+.map-subtitle {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
   pointer-events: auto;
 }
 
