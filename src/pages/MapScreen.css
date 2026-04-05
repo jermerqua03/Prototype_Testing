@@ -54,12 +54,12 @@
 .map-count {
   font-size: 12px;
   font-weight: 600;
-  color: var(--text-primary);
-  background: var(--bg-glass);
+  color: #fff;
+  background: var(--accent);
   backdrop-filter: blur(12px);
   padding: 6px 14px;
   border-radius: var(--radius-full);
-  border: 1px solid var(--border);
+  border: 1px solid var(--accent);
   pointer-events: auto;
 }
 
