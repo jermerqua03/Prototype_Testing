@@ -117,21 +117,21 @@
 }
 
 .user-marker-dot {
-  width: 18px;
-  height: 18px;
+  width: 24px;
+  height: 24px;
   border-radius: 50%;
-  background: var(--accent);
-  border: 3px solid white;
-  box-shadow: 0 0 12px var(--accent-glow);
+  background: #ffffff;
+  border: 3px solid #0984e3;
+  box-shadow: 0 0 0 2px rgba(9, 132, 227, 0.4), 0 2px 8px rgba(0, 0, 0, 0.4);
   position: relative;
 }
 
 .user-marker-pulse {
   position: absolute;
-  inset: -6px;
+  inset: -8px;
   border-radius: 50%;
-  background: var(--accent);
-  opacity: 0.3;
+  background: #0984e3;
+  opacity: 0.25;
   animation: ripple 2s ease-out infinite;
 }
 

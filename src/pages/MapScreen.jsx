@@ -21,8 +21,8 @@ function UserLocationMarker({ position }) {
   const icon = L.divIcon({
     className: 'user-marker',
     html: `<div class="user-marker-dot"><div class="user-marker-pulse"></div></div>`,
-    iconSize: [24, 24],
-    iconAnchor: [12, 12],
+    iconSize: [30, 30],
+    iconAnchor: [15, 15],
   });
 
   return (
