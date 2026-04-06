@@ -1,16 +1,19 @@
-# React + Vite
+# CRMBZ
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CRMBZ is a social platform designed to bring the digital and physical world together.
 
-Currently, two official plugins are available:
+The app allows users to attach notes, images, videos, and other digital content to real-world locations. Friends or other users can only discover and interact with that content when they are physically near the location, creating a more contextual, immersive, and meaningful social experience.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Core Idea
 
-## React Compiler
+Instead of sharing everything in a feed, CRMBZ lets people leave digital experiences in the real world for others to find.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Examples include:
+- Leaving a personal note for a friend at a favorite coffee shop
+- Dropping a hidden video memory at a travel destination
+- Sharing recommendations, stories, or messages tied to meaningful places
+- Creating location-based social interactions that feel more real and intentional
 
-## Expanding the ESLint configuration
+## Vision
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+CRMBZ explores a new kind of social platform where place, proximity, and context matter just as much as content.
