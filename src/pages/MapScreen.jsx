@@ -43,14 +43,15 @@ function UserLocationMarker({ position }) {
   );
 }
 
-function CrumbMarkers({ crumbs, onSelect }) {
+function CrumbMarkers({ crumbs, onSelect, userId }) {
   return crumbs.map((crumb) => {
     const color = crumb.type === 'note' ? '#6C5CE7' : crumb.type === 'image' ? '#00b894' : '#e17055';
+    const isOwn = crumb.user.id === userId;
     const icon = L.divIcon({
       className: 'crumb-map-marker',
       html: `
         <div style="position:relative;display:flex;align-items:center;justify-content:center">
-          <div style="width:32px;height:32px;border-radius:50%;border:2px solid ${color};background:var(--bg-secondary, #1a1a1a);display:flex;align-items:center;justify-content:center;position:relative;z-index:2">
+          <div style="width:32px;height:32px;border-radius:50%;border:2px solid ${color};${isOwn ? 'outline:2px solid white;outline-offset:2px;' : ''}background:var(--bg-secondary, #1a1a1a);display:flex;align-items:center;justify-content:center;position:relative;z-index:2">
             <div style="width:22px;height:22px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                 ${crumb.type === 'note' ? '<path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/>' : crumb.type === 'image' ? '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>' : '<polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/>'}
@@ -88,7 +89,7 @@ function RecenterButton({ position }) {
 }
 
 export default function MapScreen() {
-  const { position, geoLoading, nearbyCrumbs } = useApp();
+  const { position, geoLoading, nearbyCrumbs, user } = useApp();
   const [selectedCrumb, setSelectedCrumb] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
@@ -123,7 +124,7 @@ export default function MapScreen() {
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
         />
         <UserLocationMarker position={position} />
-        <CrumbMarkers crumbs={nearbyCrumbs} onSelect={(c) => { setSelectedCrumb(c); setSheetOpen(true); }} />
+        <CrumbMarkers crumbs={nearbyCrumbs} onSelect={(c) => { setSelectedCrumb(c); setSheetOpen(true); }} userId={user.id} />
         <RecenterButton position={position} />
       </MapContainer>
 
@@ -136,10 +137,10 @@ export default function MapScreen() {
         </button>
         <div className="sheet-content">
           {selectedCrumb ? (
-            <CrumbCard crumb={selectedCrumb} onTap={() => navigate(`/crumb/${selectedCrumb.id}`)} />
+            <CrumbCard crumb={selectedCrumb} isOwn={selectedCrumb.user.id === user.id} onTap={() => navigate(`/crumb/${selectedCrumb.id}`)} />
           ) : (
             nearbyCrumbs.slice(0, 5).map((c) => (
-              <CrumbCard key={c.id} crumb={c} compact onTap={() => { setSelectedCrumb(c); }} />
+              <CrumbCard key={c.id} crumb={c} compact isOwn={c.user.id === user.id} onTap={() => { setSelectedCrumb(c); }} />
             ))
           )}
           {selectedCrumb && (

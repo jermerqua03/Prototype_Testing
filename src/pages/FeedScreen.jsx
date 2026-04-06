@@ -13,7 +13,7 @@ const FILTERS = [
 ];
 
 export default function FeedScreen() {
-  const { nearbyCrumbs } = useApp();
+  const { nearbyCrumbs, user } = useApp();
   const [filter, setFilter] = useState('all');
   const navigate = useNavigate();
 
@@ -53,6 +53,7 @@ export default function FeedScreen() {
             <CrumbCard
               key={crumb.id}
               crumb={crumb}
+              isOwn={crumb.user.id === user.id}
               onTap={() => navigate(`/crumb/${crumb.id}`)}
             />
           ))

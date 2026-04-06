@@ -14,11 +14,11 @@ function timeAgo(dateStr) {
 const TYPE_ICONS = { note: StickyNote, image: Image, video: Video };
 const TYPE_COLORS = { note: '#6C5CE7', image: '#00b894', video: '#e17055' };
 
-export default function CrumbCard({ crumb, onTap, compact = false }) {
+export default function CrumbCard({ crumb, onTap, compact = false, isOwn = false }) {
   const TypeIcon = TYPE_ICONS[crumb.type];
 
   return (
-    <div className={`crumb-card ${compact ? 'compact' : ''} ${crumb.collected ? 'collected' : ''}`} onClick={() => onTap?.(crumb)}>
+    <div className={`crumb-card ${compact ? 'compact' : ''} ${crumb.collected ? 'collected' : ''} ${isOwn ? 'own' : ''}`} onClick={() => onTap?.(crumb)}>
       <div className="crumb-card-header">
         <Avatar name={crumb.user.name} size={compact ? 28 : 36} />
         <div className="crumb-card-meta">
@@ -49,6 +49,7 @@ export default function CrumbCard({ crumb, onTap, compact = false }) {
         <button className="crumb-stat">
           <MessageCircle size={14} /> <span>{crumb.comments}</span>
         </button>
+        {isOwn && <span className="crumb-mine-badge">Mine</span>}
         {crumb.collected && <span className="crumb-collected-badge">Collected</span>}
       </div>
     </div>
