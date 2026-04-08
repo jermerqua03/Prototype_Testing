@@ -89,7 +89,7 @@ function RecenterButton({ position }) {
 }
 
 export default function MapScreen() {
-  const { position, geoLoading, nearbyCrumbs, user } = useApp();
+  const { position, geoLoading, nearbyCrumbs, user, theme } = useApp();
   const [selectedCrumb, setSelectedCrumb] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
@@ -121,7 +121,7 @@ export default function MapScreen() {
         attributionControl={false}
       >
         <TileLayer
-          url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+          url={`https://{s}.basemaps.cartocdn.com/${theme === 'light' ? 'light_all' : 'dark_all'}/{z}/{x}/{y}{r}.png`}
         />
         <UserLocationMarker position={position} />
         <CrumbMarkers crumbs={nearbyCrumbs} onSelect={(c) => { setSelectedCrumb(c); setSheetOpen(true); }} userId={user.id} />
