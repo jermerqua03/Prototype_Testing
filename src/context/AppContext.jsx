@@ -62,11 +62,12 @@ export function AppProvider({ children }) {
     }
   }, [crumbs]);
 
-  const nearbyCrumbs = crumbs.filter((c) => {
-    if (!position) return false;
+  const nearbyCrumbs = crumbs.reduce((acc, c) => {
+    if (!position) return acc;
     const dist = getDistance(position.lat, position.lng, c.location.lat, c.location.lng);
-    return dist <= 500; // 500m radius for "nearby"
-  });
+    if (dist <= 500) acc.push({ ...c, distance: dist });
+    return acc;
+  }, []);
 
   return (
     <AppContext.Provider
