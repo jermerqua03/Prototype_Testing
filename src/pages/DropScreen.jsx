@@ -5,9 +5,9 @@ import { useApp } from '../context/AppContext';
 import './DropScreen.css';
 
 const TYPES = [
-  { key: 'note', label: 'Note', icon: StickyNote, color: '#6C5CE7' },
-  { key: 'image', label: 'Photo', icon: Image, color: '#00b894' },
-  { key: 'video', label: 'Video', icon: Video, color: '#e17055' },
+  { key: 'note', label: 'Write a Note', icon: StickyNote, color: '#6200EA' },
+  { key: 'image', label: 'Photo or Video', icon: Image, color: '#2979FF' },
+  { key: 'video', label: 'Attach Link', icon: Video, color: '#00E5FF' },
 ];
 
 const EXPIRE_OPTIONS = [
@@ -51,11 +51,15 @@ export default function DropScreen() {
   return (
     <div className="drop-screen">
       <div className="drop-header">
-        <h1 className="drop-title">Drop a Crumb</h1>
         <button className="drop-close" onClick={() => navigate(-1)}>
           <X size={20} />
         </button>
+        <span className="drop-header-title">Drop Anchor</span>
+        <div style={{ width: 36 }} />
       </div>
+
+      <div className="drop-step-label">STEP 01</div>
+      <h1 className="drop-title">Capture the<br />Moment.</h1>
 
       {/* Type Selector */}
       <div className="drop-types">
@@ -64,9 +68,9 @@ export default function DropScreen() {
             key={t.key}
             className={`drop-type ${type === t.key ? 'active' : ''}`}
             onClick={() => setType(t.key)}
-            style={type === t.key ? { borderColor: t.color, background: `${t.color}15` } : {}}
+            style={type === t.key ? { borderColor: t.color, background: `${t.color}12` } : {}}
           >
-            <t.icon size={20} color={type === t.key ? t.color : undefined} />
+            <t.icon size={18} color={type === t.key ? t.color : undefined} />
             <span>{t.label}</span>
           </button>
         ))}
@@ -76,7 +80,7 @@ export default function DropScreen() {
       <div className="drop-input-wrap">
         <textarea
           className="drop-input"
-          placeholder={type === 'note' ? 'Write your note...' : 'Add a caption...'}
+          placeholder={type === 'note' ? "Tell the world what's here..." : 'Add a caption...'}
           value={text}
           onChange={(e) => setText(e.target.value)}
           maxLength={500}
@@ -138,8 +142,8 @@ export default function DropScreen() {
 
       {/* Drop Button */}
       <button className="drop-btn" onClick={handleDrop} disabled={!text.trim()}>
-        <Send size={18} />
-        Drop Crumb
+        <MapPin size={18} />
+        Drop Anchor
       </button>
     </div>
   );

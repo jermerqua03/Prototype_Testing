@@ -1,7 +1,8 @@
 .crumb-card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 1.5px solid var(--border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
   padding: 14px;
   display: flex;
   flex-direction: column;
@@ -19,7 +20,7 @@
 }
 
 .crumb-card.own {
-  border-color: #6C5CE7;
+  border-color: #6200EA;
 }
 
 .crumb-card.compact {
@@ -117,7 +118,7 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #6C5CE7;
+  color: #6200EA;
   background: rgba(108, 92, 231, 0.15);
   padding: 3px 8px;
   border-radius: var(--radius-full);

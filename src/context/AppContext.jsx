@@ -11,7 +11,7 @@ export function AppProvider({ children }) {
   const [friends] = useState(MOCK_FRIENDS);
   const [notifications, setNotifications] = useState([]);
   const [collected, setCollected] = useState([]);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState('light');
 
   const toggleTheme = useCallback(() => {
     setTheme((prev) => {
