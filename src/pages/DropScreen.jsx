@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { StickyNote, Image, Video, MapPin, Clock, Send, X } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -25,6 +25,20 @@ export default function DropScreen() {
   const [expiry, setExpiry] = useState(24);
   const [visibility, setVisibility] = useState('friends');
   const [dropped, setDropped] = useState(false);
+  const [placeName, setPlaceName] = useState(null);
+
+  useEffect(() => {
+    if (!position) return;
+    fetch(
+      `https://nominatim.openstreetmap.org/reverse?lat=${position.lat}&lon=${position.lng}&format=json`
+    )
+      .then((r) => r.json())
+      .then((data) => {
+        const { city, town, village, suburb, neighbourhood, road, county } = data.address || {};
+        setPlaceName(neighbourhood || suburb || road || town || city || village || county || null);
+      })
+      .catch(() => setPlaceName(null));
+  }, [position]);
 
   const handleDrop = () => {
     if (!text.trim()) return;
@@ -101,7 +115,7 @@ export default function DropScreen() {
         <MapPin size={16} />
         <span>
           {position
-            ? `${position.lat.toFixed(4)}, ${position.lng.toFixed(4)}`
+            ? (placeName || `${position.lat.toFixed(4)}, ${position.lng.toFixed(4)}`)
             : 'Getting location...'}
         </span>
       </div>
