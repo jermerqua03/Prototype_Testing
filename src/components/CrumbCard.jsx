@@ -1,4 +1,4 @@
-import { StickyNote, Image, Video, Clock, Heart, MessageCircle } from 'lucide-react';
+import { StickyNote, Image, Video, Clock, MapPin, Heart, MessageCircle } from 'lucide-react';
 import Avatar from './Avatar';
 import './CrumbCard.css';
 
@@ -9,6 +9,12 @@ function timeAgo(dateStr) {
   const hrs = Math.floor(mins / 60);
   if (hrs < 24) return `${hrs}h ago`;
   return `${Math.floor(hrs / 24)}d ago`;
+}
+
+function formatDist(meters) {
+  const miles = meters / 1609.34;
+  if (miles < 0.1) return `${Math.round(meters * 3.28084)} ft away`;
+  return `${miles.toFixed(1)} mi away`;
 }
 
 const TYPE_ICONS = { note: StickyNote, image: Image, video: Video };
@@ -25,6 +31,9 @@ export default function CrumbCard({ crumb, onTap, compact = false, isOwn = false
           <span className="crumb-card-name">{crumb.user.name}</span>
           <span className="crumb-card-time">
             <Clock size={11} /> {timeAgo(crumb.createdAt)}
+            {crumb.distance != null && (
+              <span className="crumb-card-dist"><MapPin size={11} />{formatDist(crumb.distance)}</span>
+            )}
           </span>
         </div>
         <div className="crumb-type-badge" style={{ background: `${TYPE_COLORS[crumb.type]}20`, color: TYPE_COLORS[crumb.type] }}>
