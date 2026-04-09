@@ -11,9 +11,6 @@ export default function ProfileScreen() {
     <div className="profile-screen">
       <div className="profile-header">
         <h1 className="profile-heading">Profile</h1>
-        <button className="profile-settings">
-          <Settings size={20} />
-        </button>
       </div>
 
       <div className="profile-card">
