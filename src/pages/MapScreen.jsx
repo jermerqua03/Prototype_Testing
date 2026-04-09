@@ -121,6 +121,7 @@ export default function MapScreen() {
         attributionControl={false}
       >
         <TileLayer
+          key={theme}
           url={`https://{s}.basemaps.cartocdn.com/${theme === 'light' ? 'light_all' : 'dark_all'}/{z}/{x}/{y}{r}.png`}
         />
         <UserLocationMarker position={position} />
