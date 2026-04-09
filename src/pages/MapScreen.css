@@ -203,7 +203,7 @@
   border-top: 1px solid var(--border-light);
   box-shadow: var(--shadow-lg);
   max-height: 55%;
-  transform: translateY(calc(100% - 60px));
+  transform: translateY(calc(100% - 100px));
   transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -228,10 +228,11 @@
   top: 8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 36px;
-  height: 4px;
-  border-radius: 2px;
-  background: var(--border-light);
+  width: 40px;
+  height: 5px;
+  border-radius: 3px;
+  background: var(--text-muted);
+  opacity: 0.5;
 }
 
 .sheet-subtitle {
