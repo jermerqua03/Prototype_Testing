@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Circle, useMap } from 'react-leaflet';
 import L from 'leaflet';
-import { Crosshair, Layers, ChevronUp } from 'lucide-react';
+import { Crosshair, ChevronUp, Search, SlidersHorizontal, Bell, Menu } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import CrumbCard from '../components/CrumbCard';
 import './MapScreen.css';
@@ -31,8 +31,8 @@ function UserLocationMarker({ position }) {
         center={[position.lat, position.lng]}
         radius={100}
         pathOptions={{
-          color: '#6C5CE7',
-          fillColor: '#6C5CE7',
+          color: '#6200EA',
+          fillColor: '#6200EA',
           fillOpacity: 0.08,
           weight: 1,
           opacity: 0.3,
@@ -45,7 +45,7 @@ function UserLocationMarker({ position }) {
 
 function CrumbMarkers({ crumbs, onSelect, userId }) {
   return crumbs.map((crumb) => {
-    const color = crumb.type === 'note' ? '#6C5CE7' : crumb.type === 'image' ? '#00b894' : '#e17055';
+    const color = crumb.type === 'note' ? '#6200EA' : crumb.type === 'image' ? '#2979FF' : '#00E5FF';
     const isOwn = crumb.user.id === userId;
     const icon = L.divIcon({
       className: 'crumb-map-marker',
@@ -106,11 +106,23 @@ export default function MapScreen() {
   return (
     <div className="map-screen">
       <div className="map-header">
-        <div className="map-brand">
-          <h1 className="map-logo">crmbz</h1>
-          <p className="map-subtitle">Digital meets physical</p>
+        <button className="map-icon-btn" aria-label="Menu">
+          <Menu size={20} />
+        </button>
+        <h1 className="map-logo">crmbz</h1>
+        <button className="map-icon-btn" aria-label="Notifications">
+          <Bell size={20} />
+        </button>
+      </div>
+
+      <div className="map-search-row">
+        <div className="map-search-bar">
+          <Search size={16} className="map-search-icon" />
+          <span className="map-search-placeholder">Search for drops or places</span>
         </div>
-        <span className="map-count">{nearbyCrumbs.filter((c) => !c.collected).length} nearby</span>
+        <button className="map-filter-btn" aria-label="Filter">
+          <SlidersHorizontal size={18} />
+        </button>
       </div>
 
       <MapContainer
@@ -132,8 +144,11 @@ export default function MapScreen() {
       <div className={`map-sheet ${sheetOpen ? 'open' : ''}`}>
         <button className="sheet-handle" onClick={() => setSheetOpen(!sheetOpen)}>
           <div className="sheet-grip" />
-          <span>{nearbyCrumbs.length} crumbs nearby</span>
-          <ChevronUp size={18} className={sheetOpen ? 'flipped' : ''} />
+          <div className="sheet-handle-left">
+            <span>{nearbyCrumbs.filter((c) => !c.collected).length} New Drops nearby</span>
+            <span className="sheet-subtitle">Within 500 meters of your current spot</span>
+          </div>
+          <ChevronUp size={20} className={sheetOpen ? 'flipped' : ''} />
         </button>
         <div className="sheet-content">
           {selectedCrumb ? (

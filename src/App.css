@@ -33,20 +33,21 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
   padding: 6px 12px;
   color: var(--text-muted);
   transition: color 0.2s;
   position: relative;
+  border-radius: var(--radius-md);
 }
 
 .nav-item.active {
-  color: var(--accent-light);
+  color: var(--accent);
 }
 
 .nav-label {
   font-size: 10px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.02em;
 }
 
@@ -55,92 +56,19 @@
 }
 
 .nav-action-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #8b5cf6);
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-xl);
+  background: var(--accent);
   display: flex;
   align-items: center;
   justify-content: center;
   color: white;
   box-shadow: 0 4px 20px var(--accent-glow);
-  transform: translateY(-8px);
+  transform: translateY(-10px);
   transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .nav-action-btn:active {
-  transform: translateY(-6px) scale(0.95);
-}
-.app-shell {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: 430px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  background: var(--bg-primary);
-}
-
-.app-content {
-  flex: 1;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  padding: 8px 12px calc(8px + var(--safe-bottom));
-  background: var(--bg-glass);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border);
-  position: relative;
-  z-index: 1000;
-}
-
-.nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-  padding: 6px 12px;
-  color: var(--text-muted);
-  transition: color 0.2s;
-  position: relative;
-}
-
-.nav-item.active {
-  color: var(--accent-light);
-}
-
-.nav-label {
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-}
-
-.nav-action {
-  padding: 0;
-}
-
-.nav-action-btn {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--accent), #8b5cf6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  box-shadow: 0 4px 20px var(--accent-glow);
-  transform: translateY(-8px);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.nav-action-btn:active {
-  transform: translateY(-6px) scale(0.95);
+  transform: translateY(-8px) scale(0.95);
 }
