@@ -42,10 +42,40 @@
   border: 1px solid var(--border);
 }
 
+.profile-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-avatar-edit {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--bg-card);
+}
+
 .profile-info {
   display: flex;
   flex-direction: column;
   gap: 2px;
+}
+
+.edit-profile-btn {
+  margin-top: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--accent);
+  background: none;
+  padding: 0;
+  text-align: left;
 }
 
 .profile-name {
