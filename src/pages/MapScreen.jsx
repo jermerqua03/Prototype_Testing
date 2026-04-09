@@ -2,6 +2,9 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MapContainer, TileLayer, Marker, Circle, useMap } from 'react-leaflet';
 import L from 'leaflet';
+import 'leaflet.markercluster';
+import 'leaflet.markercluster/dist/MarkerCluster.css';
+import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import { Crosshair, ChevronUp, Search, SlidersHorizontal, Bell, Menu } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import CrumbCard from '../components/CrumbCard';
@@ -44,36 +47,42 @@ function UserLocationMarker({ position }) {
 }
 
 function CrumbMarkers({ crumbs, onSelect, userId }) {
-  return crumbs.map((crumb) => {
-    const color = crumb.type === 'note' ? '#6200EA' : crumb.type === 'image' ? '#2979FF' : '#00E5FF';
-    const isOwn = crumb.user.id === userId;
-    const icon = L.divIcon({
-      className: 'crumb-map-marker',
-      html: `
-        <div style="position:relative;display:flex;align-items:center;justify-content:center">
-          <div style="width:32px;height:32px;border-radius:50%;border:2px solid ${color};${isOwn ? 'outline:2px solid white;outline-offset:2px;' : ''}background:var(--bg-secondary, #1a1a1a);display:flex;align-items:center;justify-content:center;position:relative;z-index:2">
-            <div style="width:22px;height:22px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                ${crumb.type === 'note' ? '<path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/>' : crumb.type === 'image' ? '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>' : '<polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/>'}
-              </svg>
+  const map = useMap();
+
+  useEffect(() => {
+    const cluster = L.markerClusterGroup({ maxClusterRadius: 40 });
+
+    crumbs.forEach((crumb) => {
+      const color = crumb.type === 'note' ? '#6200EA' : crumb.type === 'image' ? '#2979FF' : '#00E5FF';
+      const isOwn = crumb.user.id === userId;
+      const icon = L.divIcon({
+        className: 'crumb-map-marker',
+        html: `
+          <div style="position:relative;display:flex;align-items:center;justify-content:center;width:44px;height:44px">
+            <div style="width:36px;height:36px;border-radius:50%;border:2px solid ${color};${isOwn ? 'outline:2px solid white;outline-offset:2px;' : ''}background:var(--bg-secondary, #1a1a1a);display:flex;align-items:center;justify-content:center;position:relative;z-index:2">
+              <div style="width:26px;height:26px;border-radius:50%;background:${color};display:flex;align-items:center;justify-content:center">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  ${crumb.type === 'note' ? '<path d="M16 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8Z"/><path d="M15 3v4a2 2 0 0 0 2 2h4"/>' : crumb.type === 'image' ? '<rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/>' : '<polygon points="23 7 16 12 23 17 23 7"/><rect width="15" height="14" x="1" y="5" rx="2" ry="2"/>'}
+                </svg>
+              </div>
             </div>
+            ${!crumb.collected ? `<div style="position:absolute;width:36px;height:36px;border-radius:50%;background:${color};opacity:0.25;animation:ripple 2.5s ease-out infinite;z-index:1"></div>` : ''}
           </div>
-          ${!crumb.collected ? `<div style="position:absolute;width:32px;height:32px;border-radius:50%;background:${color};opacity:0.25;animation:ripple 2.5s ease-out infinite;z-index:1"></div>` : ''}
-        </div>
-      `,
-      iconSize: [36, 36],
-      iconAnchor: [18, 18],
+        `,
+        iconSize: [44, 44],
+        iconAnchor: [22, 22],
+      });
+
+      const marker = L.marker([crumb.location.lat, crumb.location.lng], { icon });
+      marker.on('click', () => onSelect(crumb));
+      cluster.addLayer(marker);
     });
 
-    return (
-      <Marker
-        key={crumb.id}
-        position={[crumb.location.lat, crumb.location.lng]}
-        icon={icon}
-        eventHandlers={{ click: () => onSelect(crumb) }}
-      />
-    );
-  });
+    map.addLayer(cluster);
+    return () => { map.removeLayer(cluster); };
+  }, [crumbs, map, onSelect, userId]);
+
+  return null;
 }
 
 function RecenterButton({ position }) {
