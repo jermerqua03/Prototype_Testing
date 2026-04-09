@@ -102,6 +102,16 @@ export default function MapScreen() {
   const [selectedCrumb, setSelectedCrumb] = useState(null);
   const [sheetOpen, setSheetOpen] = useState(false);
   const navigate = useNavigate();
+  const swipeStartY = useRef(null);
+
+  const handleTouchStart = (e) => { swipeStartY.current = e.touches[0].clientY; };
+  const handleTouchEnd = (e) => {
+    if (swipeStartY.current === null) return;
+    const delta = e.changedTouches[0].clientY - swipeStartY.current;
+    if (delta < -40) setSheetOpen(true);
+    if (delta > 40) setSheetOpen(false);
+    swipeStartY.current = null;
+  };
 
   if (geoLoading || !position) {
     return (
@@ -150,7 +160,7 @@ export default function MapScreen() {
       </MapContainer>
 
       {/* Nearby crumbs bottom sheet */}
-      <div className={`map-sheet ${sheetOpen ? 'open' : ''}`}>
+      <div className={`map-sheet ${sheetOpen ? 'open' : ''}`} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
         <button className="sheet-handle" onClick={() => setSheetOpen(!sheetOpen)}>
           <div className="sheet-grip" />
           <div className="sheet-handle-left">
