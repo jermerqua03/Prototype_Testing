@@ -49,8 +49,8 @@ export default function CrumbCard({ crumb, onTap, compact = false, isOwn = false
         <button className="crumb-stat">
           <MessageCircle size={14} /> <span>{crumb.comments}</span>
         </button>
-        {isOwn && <span className="crumb-mine-badge">Mine</span>}
-        {crumb.collected && <span className="crumb-collected-badge">Collected</span>}
+        {isOwn && <span className="crumb-mine-badge" title="You dropped this crumb">Mine</span>}
+        {!isOwn && crumb.collected && <span className="crumb-collected-badge" title="You picked up this crumb">Collected</span>}
       </div>
     </div>
   );
