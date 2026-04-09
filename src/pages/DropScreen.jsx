@@ -72,8 +72,7 @@ export default function DropScreen() {
         <div style={{ width: 36 }} />
       </div>
 
-      <div className="drop-step-label">STEP 01</div>
-      <h1 className="drop-title">Capture the<br />Moment.</h1>
+<h1 className="drop-title">Capture the<br />Moment.</h1>
 
       {/* Type Selector */}
       <div className="drop-types">
