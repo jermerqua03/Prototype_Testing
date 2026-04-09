@@ -1,4 +1,4 @@
-import { Settings, MapPin, Package, Users, ChevronRight, LogOut, Sun, Moon } from 'lucide-react';
+import { Settings, MapPin, Package, Users, ChevronRight, LogOut, Sun, Moon, Pencil } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 import Avatar from '../components/Avatar';
 import './ProfileScreen.css';
@@ -17,10 +17,16 @@ export default function ProfileScreen() {
       </div>
 
       <div className="profile-card">
-        <Avatar name={user.name} size={64} />
+        <button className="profile-avatar-wrap">
+          <Avatar name={user.name} size={64} />
+          <span className="profile-avatar-edit">
+            <Pencil size={12} />
+          </span>
+        </button>
         <div className="profile-info">
           <h2 className="profile-name">{user.name}</h2>
           <p className="profile-username">{user.username}</p>
+          <button className="edit-profile-btn">Edit Profile</button>
         </div>
       </div>
 
